@@ -62,12 +62,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Button reg_button;
+    private ArrayList<String> secretUsernames = new ArrayList<String>();
+    private ArrayList<String> secretPasswords = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        if (getIntent().getExtras() != null) {
+            secretUsernames.add(getIntent().getExtras().getString("name"));
+            secretPasswords.add(getIntent().getExtras().getString("pass"));
+        }
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -94,6 +101,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        reg_button = (Button)findViewById(R.id.reg_button);
+        final Intent regPage = new Intent(this, RegActivity.class);
+        reg_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(regPage));
+            }
+        });
     }
 
     private void populateAutoComplete() {
@@ -195,11 +212,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        return email.equals("username@example.com");
+        return secretUsernames.contains(email);
     }
 
     private boolean isPasswordValid(String password) {
-        return password.equals("password");
+        return secretPasswords.contains(password);
     }
 
     /**
