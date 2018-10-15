@@ -63,6 +63,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private Button reg_button;
+    //this just temporary
+    private String[] badDataStorage = new String[20];
+    //dumb arraylists
     private ArrayList<String> secretUsernames = new ArrayList<String>();
     private ArrayList<String> secretPasswords = new ArrayList<String>();
 
@@ -72,6 +75,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         if (getIntent().getExtras() != null) {
+            /*for (int i = 0; i < badDataStorage.length; i++) {
+                if (badDataStorage[i] == null)
+                    badDataStorage[i] = (getIntent().getExtras().getString("name"));
+                    badDataStorage[i + 1] = (getIntent().getExtras().getString("pass"));
+                    //badDataStorage[i + 2] = (getIntent().getExtras().getString("usertype"));
+            }*/
+            //Old horrible code to remind myself of how stupid I am
             secretUsernames.add(getIntent().getExtras().getString("name"));
             secretPasswords.add(getIntent().getExtras().getString("pass"));
         }
@@ -215,6 +225,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return secretUsernames.contains(email);
     }
 
+    //my code so sloppy
     private boolean isPasswordValid(String password) {
         return secretPasswords.contains(password);
     }
