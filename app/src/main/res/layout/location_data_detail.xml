@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/keyDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/nameDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/latitudeDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/longitudeDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/streetAddressDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/cityDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/stateDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/zipcodeDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/typeDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/phoneNumberDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/websiteDetailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem" />
+</LinearLayout>
