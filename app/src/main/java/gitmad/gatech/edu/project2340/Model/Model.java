@@ -19,12 +19,16 @@ public class Model {
     /** Null Object pattern, returned when no location data is found */
     private final LocationData theNullLocationData = new LocationData();
 
+    /** holds a list of all donations */
+    private List<Donation> _donations;
+
 
     /**
      * make a new model
      */
     private Model() {
         _location_data = new ArrayList<>();
+        _donations = new ArrayList<>();
 
         //comment this out after full app developed -- for homework leave in
         //loadDummyData();
@@ -91,6 +95,16 @@ public class Model {
         return theNullLocationData;
     }
 
+    public List<Donation> getDonations() {return this._donations;}
+
+    public boolean addDonation(Donation donation) {
+        for (Donation donated : _donations) {
+            if (donated.equals(donation)) {return false;}
+        }
+        _donations.add(donation);
+        return true;
+    }
+
     /**
      * Return a course that has the matching id
      * This uses a linear O(n) search
@@ -102,7 +116,7 @@ public class Model {
             if (c.getId() == id) {
                 return c;
             }
-        }
+        }import gitmad.gatech.edu.project2340.Model
         return theNullCourse;
     }
 
