@@ -12,7 +12,7 @@ public class testActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        log = (Button)findViewById(R.id.logout);
+        //log = (Button)findViewById(R.id.logout);
         final Intent logPage = new Intent(this, LoginActivity.class);
         log.setOnClickListener(new View.OnClickListener() {
 

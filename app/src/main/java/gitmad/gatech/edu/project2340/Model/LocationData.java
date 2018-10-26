@@ -189,10 +189,12 @@ public class LocationData{
 
         //go through each location data looking for duplicate name   O(n)
         for (LocationData locdata : _location_data) {
+
             if (locdata.getName().equals(locationData.getName())) {
                 //oops found duplicate name, don't add and return failure signal
                 return false;
             }
+
         }
         //never found the name so safe to add it.
         _location_data.add(locationData);
