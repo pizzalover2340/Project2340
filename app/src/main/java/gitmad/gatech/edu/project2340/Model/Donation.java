@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Donation {
     private static int dummyTimestamp = 0;
-    //These are randomly chosen, I'm not sure what categories actually make sense
+    //These are arbitrarily chosen, I'm not sure what categories actually make sense
     public enum Category {
         FURNITURE, MENS_CLOTHING, WOMENS_CLOTHING, LINENS, KITCHENWARE, BOOKS, GAMES, FOOD
     }
@@ -36,6 +36,11 @@ public class Donation {
     public Donation(int location, String aDescription,
                     String fullDescription, int price, Category category) {
         this(location, aDescription, fullDescription, price, category, null, null);
+    }
+
+    public Donation() {
+        this(0, "enter new description", "enter new full description", 0,
+                null,null,null);
     }
 
     public int getTimestamp() {return this.timestamp;}
