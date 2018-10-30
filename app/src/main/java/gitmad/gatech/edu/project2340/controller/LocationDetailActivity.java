@@ -35,7 +35,7 @@ public class LocationDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context iContext = view.getContext();
+                Context iContext = getBaseContext();
                 Intent intent = new Intent(iContext, InventoryListActivity.class);
                 startActivity(intent);
             }
