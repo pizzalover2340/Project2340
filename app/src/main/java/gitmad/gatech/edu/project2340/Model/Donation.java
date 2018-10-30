@@ -67,4 +67,8 @@ public class Donation {
     public Object getPicture() {return this.image;}
     public void setPicture(Object nImage) {this.image = nImage;}
 
+    @Override
+    public String toString() {return aDescription;}
+
+
 }

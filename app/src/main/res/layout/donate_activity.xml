@@ -1,56 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".controller.DonateActivity">
 
-    <TextView
-        android:id="@+id/timestamp_field"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="timestamp" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/timestamp_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="timestamp" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Spinner
         android:id="@+id/loc_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/short_description_input"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:singleLine="true"
-        android:text="Short Description" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/price_field"
+        <EditText
+            android:id="@+id/short_description_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="Short Description" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/price_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="price"
+            android:inputType="number" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Spinner
         android:id="@+id/cat_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/full_description_input"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Full Description" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/comment_field"
+        <EditText
+            android:id="@+id/full_description_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Full Description" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="comment" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/comment_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="comment" />
+
+    </android.support.design.widget.TextInputLayout>
+
 
     <Button
         android:id="@+id/donate_button"

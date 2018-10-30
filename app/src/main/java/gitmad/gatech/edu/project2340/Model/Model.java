@@ -22,6 +22,8 @@ public class Model {
     /** holds a list of all donations */
     private List<Donation> _donations;
 
+    private List<Donation> _currentDonationList;
+
 
     /**
      * make a new model

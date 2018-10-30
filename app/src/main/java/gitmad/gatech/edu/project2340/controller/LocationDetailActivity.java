@@ -1,11 +1,13 @@
 package gitmad.gatech.edu.project2340.controller;
 
 import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
+import android.view.View;
 import android.view.MenuItem;
 
 import gitmad.gatech.edu.project2340.R;
@@ -30,17 +32,14 @@ public class LocationDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        /*
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Creating some new Location Data", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(getBaseContext(), EditLocationActivity.class);
+                Context iContext = view.getContext();
+                Intent intent = new Intent(iContext, InventoryListActivity.class);
                 startActivity(intent);
             }
         });
-        */
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
