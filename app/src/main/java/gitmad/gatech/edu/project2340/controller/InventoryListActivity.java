@@ -47,10 +47,10 @@ public class InventoryListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inventory_list);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-
+        */
         //Step 1.  Setup the recycler view by getting it from our layout in the main window
         View recyclerView = findViewById(R.id.donation_list);
         assert recyclerView != null;
@@ -74,7 +74,7 @@ public class InventoryListActivity extends AppCompatActivity {
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         Model model = Model.getInstance();
-        recyclerView.setAdapter(new SimpleLocationDataRecyclerViewAdapter(model.getDonations()));
+        recyclerView.setAdapter(new SimpleDonationRecyclerViewAdapter(model.getDonations()));
     }
 
     /**
@@ -83,8 +83,8 @@ public class InventoryListActivity extends AppCompatActivity {
      *
      * In this case, we are just mapping the toString of the Location Data object to a text field.
      */
-    public class SimpleLocationDataRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleLocationDataRecyclerViewAdapter.ViewHolder> {
+    public class SimpleDonationRecyclerViewAdapter
+            extends RecyclerView.Adapter<SimpleDonationRecyclerViewAdapter.ViewHolder> {
 
         /**
          * Collection of the items to be shown in this list.
@@ -95,7 +95,7 @@ public class InventoryListActivity extends AppCompatActivity {
          * set the items to be used by the adapter
          * @param items the list of items to be displayed in the recycler view
          */
-        public SimpleLocationDataRecyclerViewAdapter(List<Donation> items) {
+        public SimpleDonationRecyclerViewAdapter(List<Donation> items) {
             mDonations = items;
         }
 
@@ -149,17 +149,17 @@ public class InventoryListActivity extends AppCompatActivity {
                         //on a phone, we need to change windows to the detail view
                         Context context = v.getContext();
                         //create our new intent with the new screen (activity)
-                        //TODO:Intent intent = new Intent(context, LocationDetailActivity.class);
+                        Intent intent = new Intent(context, DonationDetailActivity.class);
                         /*
                             pass along the key of the course so we can retrieve the correct data in
                             the next window
                          */
-                        //TODO:intent.putExtra(LocationDetailFragment.ARG_LOCATION_DATA_KEY, holder.mDonations.getLocation());
+                        intent.putExtra(DonationDetailFragment.ARG_DONATION_DATA_TIMESTAMP, holder.mDonations.getTimestamp());
 
-                        //TODO:model.setCurrentLocationData(holder.mDonations);
+                        //model.setCurrentLocationData(holder.mDonations);
 
                         //now just display the new window
-                        //TODO:context.startActivity(intent);
+                        context.startActivity(intent);
                     //}
                 }
             });

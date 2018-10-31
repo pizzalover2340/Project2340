@@ -17,7 +17,7 @@ public class Donation {
     private Category category;
     private String comment;
     private Object image;
-    //private List<Donation> _donations;
+    //private List<Donation> _donations = new ArrayList<Donation>;
 
     public Donation(int locationKey, String aDescription,
                     String fullDescription, int price, Category category,
@@ -30,7 +30,7 @@ public class Donation {
         this.category = category;
         this.comment = comment;
         this.image = image;
-        //this._donations = new ArrayList<>();
+        //_donations.add(this);
     }
 
     public Donation(int location, String aDescription,
@@ -66,6 +66,7 @@ public class Donation {
 
     public Object getPicture() {return this.image;}
     public void setPicture(Object nImage) {this.image = nImage;}
+
 
     @Override
     public String toString() {return aDescription;}

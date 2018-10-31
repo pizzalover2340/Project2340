@@ -33,6 +33,7 @@
         <activity android:name=".controller.RegActivity" />
         <activity android:name=".controller.DonateActivity" />
         <activity android:name=".controller.InventoryListActivity" />
+        <activity android:name=".controller.DonationDetailActivity" />
     </application>
 
 </manifest>

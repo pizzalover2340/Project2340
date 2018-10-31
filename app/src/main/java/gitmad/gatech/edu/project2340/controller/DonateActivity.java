@@ -102,17 +102,15 @@ public class DonateActivity extends AppCompatActivity {//} implements AdapterVie
 
         final Intent locationPage = new Intent(this, LocationListActivity.class);
         donateButton.setOnClickListener((view) -> {
-            Log.d("Edit", "Add Donation");
             _donation.setFullDescription(fDescField.getText().toString());
             _donation.setADescription(sDescField.getText().toString());
             _donation.setLocation(0); //locSpinner.getSelectedItem());
             _donation.setCategory((Donation.Category) catSpinner.getSelectedItem());
+            _donation.setPrice(Integer.parseInt(priceField.getText().toString()));
 
-            if (!editing) {
-                model.addDonation(_donation);
-            } else {
-                // model.replaceDonationData(_student);
-            }
+
+            model.addDonation(_donation);
+
 
             startActivity(locationPage);
         });
