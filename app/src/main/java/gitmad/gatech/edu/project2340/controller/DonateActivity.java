@@ -13,6 +13,10 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -108,9 +112,28 @@ public class DonateActivity extends AppCompatActivity {//} implements AdapterVie
             _donation.setCategory((Donation.Category) catSpinner.getSelectedItem());
             _donation.setPrice(Integer.parseInt(priceField.getText().toString()));
 
+            String fileName = "\\raw.donation";
+
+            try {
+                String content = _donation.getFullDescription() + ";" + _donation.getADescription()
+                        + ";" + _donation.getLocation() + ";" + _donation.getCategory() + ";" +
+                        _donation.getPrice();
+                File file = new File(fileName +".csv");
+                // if file doesnt exists, then create it
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(content);
+                bw.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             model.addDonation(_donation);
-
 
             startActivity(locationPage);
         });
