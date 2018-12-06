@@ -17,7 +17,9 @@ public class Location{
         /** unique key number */
         private int _key;
 
-        /** the location name */
+
+
+    /** the location name */
         private String _name;
 
         /** the list of all registered location data for this location */
@@ -48,6 +50,7 @@ public class Location{
         /* *****************************************
          * All the property setters and getters
          * */
+
         public String getName() { return _name; }
         public void setName(String name) { _name = name; }
 
