@@ -38,10 +38,10 @@ public class SearchActivity extends AppCompatActivity {
         List<LocationData> LocationList = csv.read();
 
         Model model = Model.getInstance();
-        for(LocationData LocationData : LocationList) {
+        /*for(LocationData LocationData : LocationList) {
             //add location data to the model
             model.addLocationData(LocationData);
-        }
+        }*/
 
         //add all categories and locations to both the spinners
         List<LocationData> locationData = model.getLocationData();
@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locNameList);
+        adapter.add("All locations");
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(adapter);
 
@@ -70,28 +71,46 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        final Intent searchPage = new Intent(this, DonationListActivity.class);
+        final Intent donationDisplay = new Intent(this, DonationListActivity.class);
         confirmButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                /*String category = categorySpinner.getSelectedItem().toString();
-                List<Donation> donationData = model.getDonations();
-                List<String> donationList = new ArrayList<>();
+                String category = categorySpinner.getSelectedItem().toString();
+                /*List<Donation> donationData = model.getDonations();
+                List<Donation> donationList = new ArrayList<>();
                 for (Donation donation: donationData) {
                     if (donation.getCategory().equals(category)) {
-                        donationList.add(donation.getFullDescription());
+                        donationList.add(donation);
+                    }
+                    else if (donation.getCategory().equals(Donation.Category.ALL_CATEGORIES)){
+                        donationList.add(donation);
                     }
                 }*/
 
-                /*String location = locationSpinner.getSelectedItem().toString();
+                String location = locationSpinner.getSelectedItem().toString();
+                /*List<Donation> finalDisplay = new ArrayList<>();
                 for (LocationData locData : locationData) {
                     if (locData.getName().equals(location)) {
-                        locNameList.add(locData.getName());
+                        for (Donation donation: donationList) {
+                            if (locData.getName().equals(donation.getLocation())) {
+                                finalDisplay.add(donation);
+                            }
+                        }
+                        //add to arrayList and
+                        //display this donation in donationListActivity
+                    }
+                    else if (locData.getName().equals("All locations")) {
+                        for (Donation donation: donationList) {
+                            finalDisplay.add(donation);
+                        }
                     }
                 }*/
 
-                startActivity(new Intent(searchPage));
+                donationDisplay.putExtra("category", category);
+                donationDisplay.putExtra("location", location);
+
+                startActivity(new Intent(donationDisplay));
 
             }
         });

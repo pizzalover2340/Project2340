@@ -5,24 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import gitmad.gatech.edu.project2340.Model.LocationData;
 import gitmad.gatech.edu.project2340.Model.Donation;
+import gitmad.gatech.edu.project2340.Model.LocationData;
 import gitmad.gatech.edu.project2340.Model.Model;
+import gitmad.gatech.edu.project2340.Model.UserManagementFacade;
 import gitmad.gatech.edu.project2340.R;
 
 
@@ -80,6 +76,7 @@ public class DonateActivity extends AppCompatActivity {//} implements AdapterVie
             locNameList.add(locData.getName());
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, locNameList);
+        adapter.add("All locations");
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locSpinner.setAdapter(adapter);
 
@@ -111,10 +108,12 @@ public class DonateActivity extends AppCompatActivity {//} implements AdapterVie
             _donation.setLocation(0); //locSpinner.getSelectedItem());
             _donation.setCategory((Donation.Category) catSpinner.getSelectedItem());
             _donation.setPrice(Integer.parseInt(priceField.getText().toString()));
+            UserManagementFacade umf = UserManagementFacade.getInstance();
+            //String fileName = "\\raw.donation";
+            umf.addNewDonation(_donation.getLocation(), _donation.getADescription(), _donation.getFullDescription(),
+                    _donation.getPrice(), _donation.getCategory(), null, null);
 
-            String fileName = "\\raw.donation";
-
-            try {
+            /*try {
                 String content = _donation.getFullDescription() + ";" + _donation.getADescription()
                         + ";" + _donation.getLocation() + ";" + _donation.getCategory() + ";" +
                         _donation.getPrice();
@@ -131,9 +130,12 @@ public class DonateActivity extends AppCompatActivity {//} implements AdapterVie
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             model.addDonation(_donation);
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Added donation" , Toast.LENGTH_SHORT);
+            toast.show();
 
             startActivity(locationPage);
         });

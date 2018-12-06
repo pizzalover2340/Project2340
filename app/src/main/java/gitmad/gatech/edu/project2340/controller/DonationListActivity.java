@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +24,7 @@ import gitmad.gatech.edu.project2340.R;
 
 public class DonationListActivity extends AppCompatActivity {
 
+    public List<Donation> finalDisplay;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -140,11 +140,63 @@ public class DonationListActivity extends AppCompatActivity {
      * @param recyclerView
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        UserManagementFacade umf = UserManagementFacade.getInstance();
+        /*if (getIntent().hasExtra("location") && getIntent().hasExtra("category")) {
+            String location = (getIntent().getExtras().getString("location"));
+            String category = (getIntent().getExtras().getString("category"));
+            InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
+            CVReader csv = new CVReader(inputStream);
+            List<LocationData> LocationList = csv.read();
 
-        myAdapter = new SimpleItemRecyclerViewAdapter(umf.getDonationsAsList());
+            Model model = Model.getInstance();
+            for(LocationData LocationData : LocationList) {
+                //add location data to the model
+                model.addLocationData(LocationData);
+            }
 
-        recyclerView.setAdapter(myAdapter);
+            //add all categories and locations to both the spinners
+            List<LocationData> locationData = model.getLocationData();
+            List<String> locNameList = new ArrayList<>();
+            for (LocationData locData : locationData) {
+                locNameList.add(locData.getName());
+            }
+
+            List<Donation> donationData = model.getDonations();
+            List<Donation> donationList = new ArrayList<>();
+            for (Donation donation: donationData) {
+                if (donation.getCategory().equals(category)) {
+                    donationList.add(donation);
+                }
+                else if (donation.getCategory().equals(Donation.Category.ALL_CATEGORIES)){
+                    donationList.add(donation);
+                }
+            }
+
+            List<Donation> finalDisplay = new ArrayList<>();
+            for (LocationData locData : locationData) {
+                if (locData.getName().equals(location)) {
+                    for (Donation donation: donationList) {
+                        if (locData.getName().equals(donation.getLocation())) {
+                            finalDisplay.add(donation);
+                        }
+                    }
+                    //add to arrayList and
+                    //display this donation in donationListActivity
+                }
+                else if (locData.getName().equals("All locations")) {
+                    for (Donation donation: donationList) {
+                        finalDisplay.add(donation);
+                    }
+                }
+            }
+            myAdapter = new SimpleItemRecyclerViewAdapter(finalDisplay);
+            recyclerView.setAdapter(myAdapter);
+        } else {*/
+            UserManagementFacade umf = UserManagementFacade.getInstance();
+
+            myAdapter = new SimpleItemRecyclerViewAdapter(umf.getDonationsAsList());
+
+            recyclerView.setAdapter(myAdapter);
+        //}
     }
 
     public class SimpleItemRecyclerViewAdapter
@@ -163,6 +215,7 @@ public class DonationListActivity extends AppCompatActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.donation_list_content, parent, false);
             return new ViewHolder(view);
@@ -172,12 +225,14 @@ public class DonationListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText(mValues.get(position).getFullDescription());
-            holder.mContentView.setText(mValues.get(position).getPrice());
+            holder.mContentView.setText(String.valueOf(mValues.get(position).getPrice()));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mTwoPane) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, DonationDetailActivity.class);
+                    /*if (mTwoPane) {
                         Bundle arguments = new Bundle();
                         arguments.putString(DonationDetailFragment.ARG_DONATION_DATA_TIMESTAMP, holder.mItem.getFullDescription());
                         DonationDetailFragment fragment = new DonationDetailFragment();
@@ -190,9 +245,9 @@ public class DonationListActivity extends AppCompatActivity {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, DonateActivity.class);
                         intent.putExtra(DonationDetailFragment.ARG_DONATION_DATA_TIMESTAMP, holder.mItem.getFullDescription());
-
+*/
                         context.startActivity(intent);
-                    }
+                    //}
                 }
             });
         }
