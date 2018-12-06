@@ -17,12 +17,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import gitmad.gatech.edu.project2340.Model.Location;
-import gitmad.gatech.edu.project2340.Model.LocationData;
+import gitmad.gatech.edu.project2340.Model.Donation;
 import gitmad.gatech.edu.project2340.Model.Model;
 import gitmad.gatech.edu.project2340.R;
 
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -36,8 +34,7 @@ import java.util.List;
  * This is using a RecyclerView, which is the preferred standard for displaying
  * lists of things like our courses.
  */
-public class LocationListActivity extends AppCompatActivity {
-    private Button log;
+public class InventoryListActivity extends AppCompatActivity {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.  For 2340, this is optional, since multi-display support is extra credit.
@@ -47,59 +44,28 @@ public class LocationListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_list);
-        //log = (Button)findViewById(R.id.logout);
-        //final Intent logPage = new Intent(this, LoginActivity.class);
-        /*log.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_inventory_list);
 
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(logPage));
-            }
-        });
-        */
-        //itemArrayAdapter = new ItemArrayAdapter(getApplicationContext(), R.layout.single_list_item);
 
-        InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-        CVReader csv = new CVReader(inputStream);
-        List<LocationData> LocationList = csv.read();
-        //Log.d("My App","Location " + LocationList.toString());
-
-        Model model = Model.getInstance();
-        for(LocationData LocationData : LocationList) {
-            //add location data to the model
-            model.addLocationData(LocationData);
-        }
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context dContext = view.getContext();
-                Intent addDonationPage = new Intent(dContext, DonateActivity.class);
-                startActivity(addDonationPage);
-            }
-        });
-
+        */
         //Step 1.  Setup the recycler view by getting it from our layout in the main window
-        View recyclerView = findViewById(R.id.location_list);
+        View recyclerView = findViewById(R.id.donation_list);
         assert recyclerView != null;
         //Step 2.  Hook up the adapter to the view
         setupRecyclerView((RecyclerView) recyclerView);
 
 
         //this is only needed if you are doing an optional support for multiple display sizes
-        if (findViewById(R.id.location_detail_container) != null) {
+        /*if (findViewById(R.id.location_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
-        }
+        }*/
     }
 
     /**
@@ -108,7 +74,7 @@ public class LocationListActivity extends AppCompatActivity {
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         Model model = Model.getInstance();
-        recyclerView.setAdapter(new SimpleLocationDataRecyclerViewAdapter(model.getLocationData()));
+        recyclerView.setAdapter(new SimpleDonationRecyclerViewAdapter(model.getDonations()));
     }
 
     /**
@@ -117,20 +83,20 @@ public class LocationListActivity extends AppCompatActivity {
      *
      * In this case, we are just mapping the toString of the Location Data object to a text field.
      */
-    public class SimpleLocationDataRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleLocationDataRecyclerViewAdapter.ViewHolder> {
+    public class SimpleDonationRecyclerViewAdapter
+            extends RecyclerView.Adapter<SimpleDonationRecyclerViewAdapter.ViewHolder> {
 
         /**
          * Collection of the items to be shown in this list.
          */
-        private final List<LocationData> mLocationDatas;
+        private final List<Donation> mDonations;
 
         /**
          * set the items to be used by the adapter
          * @param items the list of items to be displayed in the recycler view
          */
-        public SimpleLocationDataRecyclerViewAdapter(List<LocationData> items) {
-            mLocationDatas = items;
+        public SimpleDonationRecyclerViewAdapter(List<Donation> items) {
+            mDonations = items;
         }
 
         @Override
@@ -142,7 +108,7 @@ public class LocationListActivity extends AppCompatActivity {
               If you look at the example file, you will see it currently just 2 TextView elements
              */
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.location_list_content, parent, false);
+                    .inflate(R.layout.donation_list_content, parent, false);
             return new ViewHolder(view);
         }
 
@@ -155,13 +121,13 @@ public class LocationListActivity extends AppCompatActivity {
             to an element in the view (which is one of our two TextView widgets
              */
             //start by getting the element at the correct position
-            holder.mLocationData = mLocationDatas.get(position);
+            holder.mDonations = mDonations.get(position);
             /*
               Now we bind the data to the widgets.  In this case, pretty simple, put the key in one
               textview and the string rep of a location in the other.
              */
-            holder.mKeyView.setText("" + mLocationDatas.get(position).getKey());
-            holder.mContentView.setText(mLocationDatas.get(position).toString());
+            holder.mPriceView.setText("" + mDonations.get(position).getPrice());
+            holder.mDescriptionView.setText(mDonations.get(position).toString());
 
             /*
              * set up a listener to handle if the user clicks on this list item, what should happen?
@@ -169,39 +135,39 @@ public class LocationListActivity extends AppCompatActivity {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mTwoPane) {
+                    /*if (mTwoPane) {
                         //if a two pane window, we change the contents on the main screen
                         Bundle arguments = new Bundle();
-                        arguments.putInt(LocationDetailFragment.ARG_LOCATION_DATA_KEY, holder.mLocationData.getKey());
+                        arguments.putInt(LocationDetailFragment.ARG_LOCATION_DATA_KEY, holder.mDonations.getKey());
 
                         LocationDetailFragment fragment = new LocationDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.location_detail_container, fragment)
                                 .commit();
-                    } else {
+                    } else {*/
                         //on a phone, we need to change windows to the detail view
                         Context context = v.getContext();
                         //create our new intent with the new screen (activity)
-                        Intent intent = new Intent(context, LocationDetailActivity.class);
+                        Intent intent = new Intent(context, DonationDetailActivity.class);
                         /*
                             pass along the key of the course so we can retrieve the correct data in
                             the next window
                          */
-                        intent.putExtra(LocationDetailFragment.ARG_LOCATION_DATA_KEY, holder.mLocationData.getKey());
+                        intent.putExtra(DonationDetailFragment.ARG_DONATION_DATA_TIMESTAMP, holder.mDonations.getTimestamp());
 
-                        model.setCurrentLocationData(holder.mLocationData);
+                        //model.setCurrentLocationData(holder.mDonations);
 
                         //now just display the new window
                         context.startActivity(intent);
-                    }
+                    //}
                 }
             });
         }
 
         @Override
         public int getItemCount() {
-            return mLocationDatas.size();
+            return mDonations.size();
         }
 
         /**
@@ -212,20 +178,20 @@ public class LocationListActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView mKeyView;
-            public final TextView mContentView;
-            public LocationData mLocationData;
+            public final TextView mPriceView;
+            public final TextView mDescriptionView;
+            public Donation mDonations;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mKeyView = (TextView) view.findViewById(R.id.key);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mPriceView = (TextView) view.findViewById(R.id.price);
+                mDescriptionView = (TextView) view.findViewById(R.id.description);
             }
 
             @Override
             public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
+                return super.toString() + " '" + mDescriptionView.getText() + "'";
             }
         }
     }

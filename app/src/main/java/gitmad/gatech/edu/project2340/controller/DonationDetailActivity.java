@@ -22,24 +22,15 @@ import gitmad.gatech.edu.project2340.R;
  * since we are displaying a list of location data in the location.  We are going to use a
  * recycler view again.
  */
-public class LocationDetailActivity extends AppCompatActivity {
+public class DonationDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_donation_detail);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context iContext = getBaseContext();
-                Intent intent = new Intent(iContext, InventoryListActivity.class);
-                startActivity(intent);
-            }
-        });
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -61,13 +52,13 @@ public class LocationDetailActivity extends AppCompatActivity {
             // using a fragment transaction.  Pass the location info to
             //the fragment
             Bundle arguments = new Bundle();
-            arguments.putInt(LocationDetailFragment.ARG_LOCATION_DATA_KEY,
-                    getIntent().getIntExtra(LocationDetailFragment.ARG_LOCATION_DATA_KEY, 0));
+            arguments.putInt(DonationDetailFragment.ARG_DONATION_DATA_TIMESTAMP,
+                    getIntent().getIntExtra(DonationDetailFragment.ARG_DONATION_DATA_TIMESTAMP, 1));
 
-            LocationDetailFragment fragment = new LocationDetailFragment();
+            DonationDetailFragment fragment = new DonationDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.location_detail_container, fragment)
+                    .add(R.id.donation_detail_container, fragment)
                     .commit();
         }
 
@@ -84,9 +75,10 @@ public class LocationDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, LocationListActivity.class));
+            navigateUpTo(new Intent(this, InventoryListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 }
+

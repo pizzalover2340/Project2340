@@ -18,9 +18,12 @@ public class Model {
 
     /** Null Object pattern, returned when no location data is found */
     private final LocationData theNullLocationData = new LocationData();
+    private final Donation theNullDonation = new Donation();
 
     /** holds a list of all donations */
     private List<Donation> _donations;
+
+    private List<Donation> _currentDonationList;
 
 
     /**
@@ -98,11 +101,17 @@ public class Model {
     public List<Donation> getDonations() {return this._donations;}
 
     public boolean addDonation(Donation donation) {
-        for (Donation donated : _donations) {
-            if (donated.equals(donation)) {return false;}
-        }
         _donations.add(donation);
         return true;
+    }
+
+    public Donation getDonationByTimestamp(int timestamp) {
+        for (Donation donation : _donations) {
+            if (donation.getTimestamp() == timestamp) {
+                return donation;
+            }
+        }
+        return theNullDonation;
     }
 
     /**

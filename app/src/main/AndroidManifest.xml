@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controller.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.LoginActivity" />
-        <activity android:name=".controller.LocationListActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".controller.LocationDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".controller.RegActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
